@@ -347,22 +347,22 @@ efficient"""
 
     def predict(
         self,
-        text: str = Input(description="Text to convert to speech"),
+        text: str = Input(description="Text to convert to speech", default="Hello, I am, uh, how should I say this? I am a voice clone made by an AI.",),
         reference: Path = Input(
             description="Reference speech to copy style from", default=None),
         alpha: float = Input(
-            description="Only used for long text inputs or in case of reference speaker, \determines the timbre of the speaker. Use lower values to sample style based \on previous or reference speech instead of text.", ge=0, le=1,
+            description="Only used for long text inputs or in case of reference speaker, \determines the timbre of the speaker. Use lower values to sample style based \on previous or reference speech instead of text.", ge=-1, le=2,
             default=0.3
         ),
         beta: float = Input(
             description="Only used for long text inputs or in case of reference speaker, \determines the prosody of the speaker. Use lower values to sample style based \
-            on previous or reference speech instead of text.", ge=0, le=1,
+            on previous or reference speech instead of text.", ge=-1, le=2,
             default=0.7
         ),
         diffusion_steps: int = Input(
-            description="Number of diffusion steps", ge=0, le=50, default=10),
+            description="Number of diffusion steps", ge=0, le=100, default=10),
         embedding_scale: float = Input(
-            description="Embedding scale, use higher values for pronounced emotion", ge=0, le=5, default=1),
+            description="Embedding scale, use higher values for pronounced emotion", ge=0, le=10, default=1),
         seed: int = Input(description="Seed for reproducibility",
                           default=0)
     ) -> Path:
